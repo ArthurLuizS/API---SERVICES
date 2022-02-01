@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -18,6 +19,7 @@ import com.logworks.log.api.model.EntregaModel;
 import com.logworks.log.api.model.input.EntregaInput;
 import com.logworks.log.domain.model.Entrega;
 import com.logworks.log.domain.repository.EntregaRepository;
+import com.logworks.log.domain.service.FinalizacaoEntregaService;
 import com.logworks.log.domain.service.SolicitacaoEntregaService;
 
 import lombok.AllArgsConstructor;
@@ -29,6 +31,7 @@ public class EntregaController {
 	private EntregaAssembler  entregaAssembler;
 	private EntregaRepository entregaRepository;
 	private SolicitacaoEntregaService solicitacaoEntregaService;
+	private FinalizacaoEntregaService finalizacaoEntregaService;
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -37,6 +40,11 @@ public class EntregaController {
 		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
 		return entregaAssembler.toModel(entregaSolicitada);
 		
+	}
+	@PutMapping("/{entregaId}/finalizacao")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void finalizar(@PathVariable Long entregaId) {
+		finalizacaoEntregaService.finalizar(entregaId);
 	}
 	
 	@GetMapping

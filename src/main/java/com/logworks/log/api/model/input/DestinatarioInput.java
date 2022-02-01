@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class DestinatarioInput {
 	private String nome;
-	private String Logradouro;
+	private String logradouro;
 	private String numero;
 	private String complemento;
 	private String bairro;

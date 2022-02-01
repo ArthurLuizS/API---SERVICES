@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class EntregaInput {
 	
-	private ClienteIdInput clienteId;
+	private ClienteIdInput cliente;
 	
 	private DestinatarioInput destinatario;
 	
